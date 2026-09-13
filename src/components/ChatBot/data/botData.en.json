@@ -1,85 +1,509 @@
- {
-  "greeting": "Welcome to V.18 Premium Tuition! How can we assist you today?",
-  "fallback": "I couldn't find an exact answer. Please reach our counselor directly at +91 8197770882 or admin@v18premiumtuition.com.",
+{
+  "greeting": "Welcome to V.18 Premium Tuition! 🚀\nPlease choose an option below or type your query:",
+  "fallback": "I'm still learning and couldn't find an exact match for that. 😊\n\nYou can chat with us on WhatsApp at 💬 9187502066 or call 📞 +91 8197770882 for immediate support!",
   "nodes": [
     {
-      "id": "services",
-      "label": "📚 Our Services & Programs",
-      "response": "Here are our core learning and partnership programs:",
-      "keywords": ["service", "program", "course", "offer", "learn"],
+      "id": "services_root",
+      "label": "📚 Services & Programs",
+      "response": "Here are our core programs. Please select one to explore details:",
+      "keywords": ["service", "services", "program", "programs", "course", "courses", "offer", "learn", "study"],
+      "patterns": [
+        "what.*(services|programs|courses)",
+        "show.*(services|options|courses)",
+        "tell.*about.*services"
+      ],
       "children": [
         {
-          "id": "sip",
+          "id": "school_integration",
           "label": "🏫 School Integration Program (SIP)",
-          "response": "V.18 SIP integrates 3D smart classroom modules and AR/VR labs directly into school curricula.",
-          "keywords": ["sip", "school", "integrate", "tieup", "institution"],
+          "response": "The V.18 School Integrated Program (SIP) brings 3D, AR, VR & AI-powered learning directly into your school classrooms without altering your existing textbook curriculum. What would you like to know about SIP?",
+          "keywords": ["sip", "school", "school integration", "school program", "tieup", "institution", "smart school"],
+          "patterns": ["school.*integration", "sip.*(program|school|plan)", "integrate.*school"],
           "children": [
             {
-              "id": "sip_features",
-              "label": "What are SIP features?",
-              "response": "SIP includes: 1) 3D visual concept videos, 2) Teacher training, 3) Assessment tools for CBSE/ICSE/State boards.",
-              "keywords": ["feature", "benefit", "curriculum", "syllabus"],
+              "id": "sip_overview",
+              "label": "What is V.18 SIP?",
+              "response": "V.18 SIP is a complete tech-enabled academic solution that integrates immersive 3D lessons, Virtual Reality (VR), Augmented Reality (AR), and AI learning analytics into your classrooms without changing your existing school curriculum or timetable.",
+              "keywords": ["what is sip", "about sip", "sip overview", "explain sip", "meaning of sip"],
+              "patterns": ["what.*is.*sip", "tell.*about.*sip", "explain.*school.*integration"],
               "children": []
             },
             {
-              "id": "sip_contact",
-              "label": "How to onboard my school?",
-              "response": "Call our Institutional Desk at +91 8197770882 to schedule an on-campus demonstration.",
-              "keywords": ["onboard", "partner", "book demo", "school visit"],
+              "id": "sip_grades_boards",
+              "label": "Grades, Boards & Subjects Covered",
+              "response": "📚 SIP Academic Coverage:\n• Grades: 8th, 9th, and 10th Grade\n• Boards: CBSE & Karnataka State Board\n• Subjects: Science (Physics, Chemistry, Biology), Mathematics, Social Science, and English.",
+              "keywords": ["grades", "classes", "boards", "subjects", "cbse", "state board", "8th", "9th", "10th", "syllabus"],
+              "patterns": [
+                "(which|what).*(grade|class|board|subject)",
+                "(cbse|state board).*coverage",
+                "syllabus.*covered"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_curriculum_impact",
+              "label": "Will it change our school syllabus?",
+              "response": "No, not at all. SIP does not change your textbook syllabus or school routine. It supports your teachers with 3D animated concepts, interactive simulations, and virtual science labs aligned directly with NEP 2020 guidelines.",
+              "keywords": ["change syllabus", "routine", "timetable", "existing curriculum", "alter syllabus"],
+              "patterns": [
+                "change.*(syllabus|curriculum|routine|timetable)",
+                "affect.*routine"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_teacher_support",
+              "label": "Teacher Training & Enablement",
+              "response": "👨‍🏫 Teacher Enablement under SIP:\n• Ready-to-use digital lesson plans\n• Smart board compatible 3D teaching resources\n• Hands-on teacher training and continuous academic support.",
+              "keywords": ["teacher", "teachers", "teacher training", "lesson plans", "training support", "faculty"],
+              "patterns": [
+                "teacher.*(training|support|help|plan)",
+                "how.*help.*teachers",
+                "train.*faculty"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_school_benefits",
+              "label": "Benefits for School Management",
+              "response": "🏆 Core Benefits for Your School:\n• Brand Value: Establish your school with modern AR/VR smart classrooms\n• Admissions: Attract more student admissions\n• Results: Improve board exam scores by replacing memorization with visual clarity\n• Parent Satisfaction: Deliver visible technology-driven learning.",
+              "keywords": ["benefit", "benefits", "advantage", "school benefit", "management", "why join", "admissions"],
+              "patterns": [
+                "(benefit|advantage|why).*(school|management|join)",
+                "how.*increase.*admissions"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_devices_hardware",
+              "label": "Devices & Platforms Supported",
+              "response": "💻 Supported Platforms & Devices:\n• Smart Boards (Interactive lessons)\n• VR Headsets (360° virtual world tours & labs)\n• Tablets & Mobiles (AR activities on the go)\n• Windows PC, Web Browsers & TV Screen Cast.",
+              "keywords": ["device", "devices", "hardware", "smart board", "vr headset", "tablet", "mobile", "computer", "platform"],
+              "patterns": [
+                "(which|what).*(device|hardware|platform)",
+                "support.*(smart board|tablet|mobile|vr)"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_packages_pricing",
+              "label": "Plans & Packages Available",
+              "response": "📦 3 Flexible Onboarding Packages:\n1. Software Only: For schools with existing smart boards\n2. Hardware + Software: Pre-configured smart boards, VR headsets, and tablets with software\n3. Complete Immersive Lab Setup: Full lab installation, hardware, software, and training.\n(Available in Silver, Gold, Platinum, Diamond, and Elite plans).",
+              "keywords": ["plan", "plans", "package", "packages", "pricing", "cost", "software only", "hardware", "lab setup"],
+              "patterns": [
+                "(plan|package|cost|pricing|price).*(sip|school)",
+                "how.*much.*sip"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_onboarding_process",
+              "label": "How to Join (Demo Class Process)",
+              "response": "🤝 Transparent 6-Step Joining Process:\n1. No direct implementation\n2. Schedule a demo class for your school\n3. Attend demo along with your students\n4. Experience live 3D visual learning\n5. Clear all doubts with our experts\n6. Join SIP only when 100% satisfied.",
+              "keywords": ["process", "how to join", "join sip", "steps", "onboarding", "demo class", "procedure"],
+              "patterns": [
+                "(how|process|steps).*(join|start|onboard|demo)",
+                "procedure.*sip"
+              ],
+              "children": []
+            },
+            {
+              "id": "sip_book_demo",
+              "label": "📞 Book a School Demo / Proposal",
+              "response": "Schedule a live on-campus demonstration for your school:\n\n💬 WhatsApp: 9187502066\n📞 Phone: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com\n📍 Address: APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka\n\nOur team will arrange a free demo session at your convenience.",
+              "keywords": ["book demo", "schedule demo", "contact sip", "call sip", "demo class", "whatsapp sip"],
+              "patterns": [
+                "book.*(demo|trial|visit)",
+                "contact.*(sip|school team)"
+              ],
               "children": []
             }
           ]
         },
         {
-          "id": "franchise",
-          "label": "🏢 Franchise Opportunities",
-          "response": "Partner with V.18 to launch a smart tech-tuition branch in your locality.",
-          "keywords": ["franchise", "business", "partner", "invest", "center"],
+          "id": "smart_learning_kit",
+          "label": "📦 Smart Learning Kit",
+          "response": "The V.18 Smart Learning Kit combines interactive 3D visual study materials, digital flashcards, and chapter-wise concept boosters designed for deep understanding. What would you like to know about the kit?",
+          "keywords": ["kit", "learning kit", "smart kit", "material", "books", "3d kit", "study kit", "home study kit", "flashcards", "self study"],
+          "patterns": [
+            "(smart|study|learning).*kit",
+            "what.*is.*kit",
+            "order.*kit",
+            "buy.*kit"
+          ],
           "children": [
             {
-              "id": "franchise_roi",
-              "label": "Profitability & ROI Model",
-              "response": "Low upfront investment with high margins due to pre-built digital content, AR/VR labs, and strong student demand.",
-              "keywords": ["roi", "profit", "margin", "cost", "investment", "earn"],
+              "id": "kit_overview",
+              "label": "What is the Smart Learning Kit?",
+              "response": "The V.18 Smart Learning Kit is a comprehensive self-study package that blends physical smart books with interactive 3D/AR digital app access, designed to turn complex concepts into easy visual lessons at home.",
+              "keywords": ["what is kit", "about kit", "explain kit", "overview", "what is smart learning kit"],
+              "patterns": [
+                "what.*is.*(kit|smart learning kit)",
+                "tell.*about.*kit"
+              ],
               "children": []
             },
             {
-              "id": "franchise_support",
-              "label": "What support is provided?",
-              "response": "We provide center setup guidance, hardware specs, teacher training, marketing collateral, and student lead generation.",
-              "keywords": ["support", "training", "setup", "help", "marketing"],
+              "id": "kit_contents",
+              "label": "What is included inside the Kit?",
+              "response": "📦 Inside the Smart Learning Kit:\n• 3D Interactive App Access & AR visual modules\n• High-yield illustrated concept books with QR code videos\n• Formula sheets & quick revision flashcards\n• Chapter-wise practice test papers with solution keys.",
+              "keywords": ["contents", "inside kit", "what is included", "package contents", "items", "books included"],
+              "patterns": [
+                "(what|items|contents).*(inside|included|in).*kit",
+                "what.*do.*i.*get"
+              ],
+              "children": []
+            },
+            {
+              "id": "kit_grades_boards",
+              "label": "Grades, Boards & Subjects Covered",
+              "response": "📚 Academic Coverage for Smart Kit:\n• Grades: 8th, 9th & 10th Grade\n• Boards: CBSE, ICSE & Karnataka State Board\n• Subjects: Science (Physics, Chemistry, Biology) and Mathematics.",
+              "keywords": ["grades", "classes", "boards", "subjects", "cbse", "state board", "8th", "9th", "10th", "maths", "science"],
+              "patterns": [
+                "(which|what).*(grade|class|board|subject).*kit",
+                "kit.*for.*(8th|9th|10th|cbse|state)"
+              ],
+              "children": []
+            },
+            {
+              "id": "kit_devices_supported",
+              "label": "Supported Devices & Compatibility",
+              "response": "📱 Device Compatibility:\nThe V.18 companion app works across Android phones, tablets, iPads, Windows laptops, and web browsers with automatic cloud sync across devices.",
+              "keywords": ["devices", "compatibility", "android", "mobile", "tablet", "ipad", "laptop", "pc", "ios"],
+              "patterns": [
+                "(which|what|device).*(compatible|support|work|phone|tablet)",
+                "can.*i.*use.*on.*mobile"
+              ],
+              "children": []
+            },
+            {
+              "id": "kit_price_order",
+              "label": "💰 Price & How to Order",
+              "response": "💵 Ordering the Smart Learning Kit:\nThe kit is available with direct home delivery options.\n\nChat on WhatsApp at 💬 9187502066 or call 📞 +91 8197770882 to order your kit.",
+              "keywords": ["price", "cost", "fee", "how to buy", "order", "purchase", "delivery", "rate", "how much"],
+              "patterns": [
+                "(price|cost|how much|buy|order|purchase).*(kit|learning kit)",
+                "how.*to.*order"
+              ],
               "children": []
             }
           ]
-        },
-        {
-          "id": "home_tuition",
-          "label": "👨‍🏫 1-on-1 Home Tuition",
-          "response": "Personalized 1-on-1 tutoring at home with 3D visualization tools for grades 8 to 12.",
-          "keywords": ["home", "tutor", "1 on 1", "personal", "individual"],
-          "children": []
         },
         {
           "id": "offline_classes",
-          "label": "🎒 Offline Smart Classes",
-          "response": "Classroom batches in Jamkhandi center with interactive screens and small batch sizes.",
-          "keywords": ["offline", "jamkhandi", "classroom", "batch", "center"],
+          "label": "🎒 Offline Classes",
+          "response": "V.18 Offline Classroom Coaching is conducted at our Jamkhandi center with 3D smart boards, small batches, and expert mentorship. What would you like to know about our offline classes?",
+          "keywords": ["offline", "classroom", "center", "jamkhandi", "batch", "physical class", "in person", "coaching", "tuition center"],
+          "patterns": ["offline.*(class|tuition|batch|coaching)", "center.*(jamkhandi|location|offline)"],
+          "children": [
+            {
+              "id": "offline_timings",
+              "label": "🕒 Batch Timings & Schedule",
+              "response": "🕒 Batch Timings at Jamkhandi Center:\n• Morning Batch (9th & 10th): 6:15 AM – 8:15 AM\n• Evening Batch (PUC-2 / 12th): 4:00 PM – 6:00 PM\n• Days: Monday to Saturday with Sunday Weekly Tests.",
+              "keywords": ["timing", "timings", "time", "schedule", "morning", "evening", "6:15", "4:00", "puc", "9th", "10th", "hours", "when"],
+              "patterns": [
+                "(what|tell).*time",
+                "which.*time",
+                "when.*(class|start|open|batch)",
+                "(morning|evening).*batch",
+                "class.*schedule"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_subjects_boards",
+              "label": "📚 Subjects & Boards Taught",
+              "response": "📖 Academic Coverage for Offline Classes:\n• Grades: 8th, 9th, 10th & PUC 1st/2nd Year\n• Boards: Karnataka State Board, CBSE, ICSE\n• Subjects: Science (Physics, Chemistry, Biology), Mathematics & PUC Science streams with bilingual explanation (English + Kannada).",
+              "keywords": ["subject", "subjects", "board", "boards", "cbse", "state board", "icse", "puc", "science", "maths", "mathematics"],
+              "patterns": [
+                "(which|what).*(subject|board|syllabus)",
+                "teach.*(science|maths|puc)",
+                "cbse.*offline"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_weekly_tests",
+              "label": "📝 Weekly Tests & Progress",
+              "response": "📊 Assessment & Testing System:\n• Weekly tests conducted every Sunday to measure conceptual clarity\n• Regular performance reports shared with parents\n• One-on-one doubt clearing sessions for weak topics.",
+              "keywords": ["test", "tests", "weekly test", "exam", "assessment", "sunday test", "report", "progress", "marks"],
+              "patterns": [
+                "(weekly|sunday).*test",
+                "how.*(test|evaluate|track).*progress"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_location_address",
+              "label": "📍 Center Address & Location",
+              "response": "📍 V.18 Offline Center Address:\nAPMC Yard, Prabhat Nagar, Jamkhandi, Karnataka.\n📞 Phone: +91 8197770882\n💬 WhatsApp: 9187502066\n✉️ Email: admin@v18premiumtuition.com",
+              "keywords": ["where", "location", "address", "map", "place", "jamkhandi", "apmc", "prabhat nagar", "reach", "landmark"],
+              "patterns": [
+                "(where|address|location).*(center|tuition|offline|branch)",
+                "how.*reach.*center"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_features_benefits",
+              "label": "✨ Classroom Features & Facilities",
+              "response": "🌟 What makes V.18 Offline Classes Special:\n• Smart Classrooms with interactive 3D visual modules\n• AR/VR Lab access for practical concept visualization\n• Small batch sizes ensuring individual attention\n• High-yield printed study material & formula booklets.",
+              "keywords": ["feature", "features", "facility", "facilities", "smart board", "ar vr", "study material", "notes", "batch size"],
+              "patterns": [
+                "(feature|benefit|facility|facilities).*(offline|class)",
+                "why.*choose.*offline"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_fees_structure",
+              "label": "💰 Fee Structure & Installments",
+              "response": "💵 Fee Structure for Offline Classes:\nTuition fees depend on the student's grade (8th–10th or PUC) with convenient installment options.\n\nCall our counselor at 📞 +91 8197770882 or message on WhatsApp at 💬 9187502066 for the exact fee chart.",
+              "keywords": ["fee", "fees", "price", "cost", "charge", "payment", "installment", "rate", "how much"],
+              "patterns": [
+                "(fee|fees|cost|price|charge).*(offline|tuition|class)",
+                "how.*much.*(fees|cost)"
+              ],
+              "children": []
+            },
+            {
+              "id": "offline_book_demo",
+              "label": "📞 Book Free Offline Demo Class",
+              "response": "Experience our 3D smart classroom before enrolling!\n\n📞 Call to Book Demo: +91 8197770882\n💬 WhatsApp: 9187502066\n📍 Center: APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka.",
+              "keywords": ["book demo", "free trial", "trial class", "demo class", "visit center", "admission"],
+              "patterns": [
+                "book.*(demo|trial|free class)",
+                "(join|take).*admission"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "academic_partner",
+          "label": "🤝 Academic Partner Program",
+          "response": "The V.18 Academic Partner Program collaborates with coaching institutes, private tutors, and educators to deliver tech-enabled 3D visual learning and mutual growth. What would you like to know about our partner program?",
+          "keywords": ["academic partner", "partner", "partner program", "educator partner", "collaboration", "coaching tieup", "tutor partnership"],
+          "patterns": [
+            "academic.*partner",
+            "become.*partner",
+            "partnership.*program",
+            "partner.*with.*v18"
+          ],
+          "children": [
+            {
+              "id": "partner_overview",
+              "label": "What is the Academic Partner Program?",
+              "response": "The V.18 Academic Partner Program empowers coaching centers and independent teachers to upgrade their classrooms using V.18's 3D visual curriculum, smart software, and brand ecosystem.",
+              "keywords": ["what is partner program", "about partner", "explain partner", "overview"],
+              "patterns": [
+                "what.*is.*(partner|academic partner)",
+                "tell.*about.*partner"
+              ],
+              "children": []
+            },
+            {
+              "id": "partner_eligibility",
+              "label": "Who can become a Partner?",
+              "response": "👥 Eligibility for Academic Partnership:\n• Private coaching centers & institutes\n• Independent tuition teachers & subject experts\n• Educational entrepreneurs and after-school academies.",
+              "keywords": ["who can join", "eligibility", "criteria", "requirements", "qualification", "tutor join"],
+              "patterns": [
+                "who.*(can join|eligible|become partner)",
+                "eligibility.*partner"
+              ],
+              "children": []
+            },
+            {
+              "id": "partner_benefits_support",
+              "label": "Support & Resources Provided",
+              "response": "🎁 Partner Support from V.18:\n• 3D visual content for CBSE, ICSE & State Board\n• Smart classroom teaching software & assessments\n• Teacher training & pedagogy upskilling\n• Co-branding & student admission marketing support.",
+              "keywords": ["support", "resources", "benefits", "what will i get", "training", "software access"],
+              "patterns": [
+                "(support|benefits|resources).*(partner|provided)",
+                "what.*v18.*provide"
+              ],
+              "children": []
+            },
+            {
+              "id": "partner_roi_growth",
+              "label": "Business Growth & Revenue Model",
+              "response": "📈 Growth & Revenue Benefits:\n• Attract more student admissions with 3D tech\n• Low operational overheads with attractive revenue margins\n• Increased student retention and better board results.",
+              "keywords": ["revenue", "roi", "earning", "profit", "growth", "margin", "income"],
+              "patterns": [
+                "(revenue|profit|earn|income|margin).*(partner|partnership)",
+                "how.*grow.*business"
+              ],
+              "children": []
+            },
+            {
+              "id": "partner_contact_demo",
+              "label": "📞 Apply for Partnership / Schedule Call",
+              "response": "Connect with our Partnership Director to discuss terms and explore a live platform demo:\n\n💬 WhatsApp: 9187502066\n📞 Phone: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com\n📍 Center: APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka.",
+              "keywords": ["apply partner", "partner contact", "call partner team", "partner registration", "schedule partner demo", "whatsapp partner"],
+              "patterns": [
+                "(apply|register|contact|join).*(partner|partnership)",
+                "schedule.*partner.*call"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "home_tutors",
+          "label": "👨‍🏫 Home Tutors (1-on-1)",
+          "response": "V.18 Home Tutors provide verified, 1-on-1 personal coaching at your doorstep powered by 3D visual concept modules. What would you like to know about our home tutoring service?",
+          "keywords": ["home tutor", "home tuition", "private tutor", "1 on 1", "personal teacher", "home teacher", "individual tutor", "doorstep tuition"],
+          "patterns": [
+            "home.*(tutor|tuition|teacher)",
+            "1.*(on|to).*1",
+            "private.*(tuition|teacher)",
+            "tutor.*at.*home"
+          ],
+          "children": [
+            {
+              "id": "home_tutor_overview",
+              "label": "What is the Home Tutor Service?",
+              "response": "V.18 Home Tutoring delivers customized 1-on-1 teaching at your home by verified subject experts using interactive 3D visual tools to ensure complete conceptual mastery.",
+              "keywords": ["what is home tutor", "about home tutor", "explain home tuition", "overview"],
+              "patterns": [
+                "what.*is.*(home tutor|home tuition)",
+                "tell.*about.*home.*tutor"
+              ],
+              "children": []
+            },
+            {
+              "id": "home_tutor_grades_subjects",
+              "label": "Grades, Boards & Subjects Covered",
+              "response": "📚 Academic Coverage for Home Tutors:\n• Grades: Class 1 to 10 & PUC 1st/2nd Year (11th & 12th)\n• Boards: CBSE, ICSE & Karnataka State Board\n• Subjects: Mathematics, Science (Physics, Chemistry, Biology), English & PUC core streams.",
+              "keywords": ["grades", "classes", "boards", "subjects", "cbse", "state board", "icse", "puc", "maths", "science", "10th"],
+              "patterns": [
+                "(which|what).*(grade|class|board|subject).*home",
+                "home.*tutor.*for.*(cbse|icse|state|puc|science|maths)"
+              ],
+              "children": []
+            },
+            {
+              "id": "home_tutor_qualification",
+              "label": "Tutor Verification & Quality",
+              "response": "🛡️ Quality & Safety Standards:\n• Complete background and credential verification\n• Strict subject competency testing & teaching evaluations\n• Certified in V.18 3D visual pedagogy and modern doubt-clearing methods.",
+              "keywords": ["verification", "qualified", "background check", "safety", "experience", "teacher quality"],
+              "patterns": [
+                "how.*(verify|select|check).*tutor",
+                "tutor.*(qualified|verification|safety|experience)"
+              ],
+              "children": []
+            },
+            {
+              "id": "home_tutor_timings_flexibility",
+              "label": "Timings & Flexible Schedules",
+              "response": "🕒 Flexible Scheduling:\nClasses are scheduled at your preferred time slots (morning or evening) with options for weekday sessions or intensive weekend batches.",
+              "keywords": ["timings", "schedule", "flexible time", "days", "morning", "evening", "weekend batch", "hours"],
+              "patterns": [
+                "(timing|schedule|time|hours).*(home tutor|home tuition)",
+                "when.*tutor.*come"
+              ],
+              "children": []
+            },
+            {
+              "id": "home_tutor_fees_demo",
+              "label": "💰 Fees & Book a Free Demo",
+              "response": "💵 Affordable Monthly Packages:\nCharges depend on grade level and weekly class frequency.\n\nBook a Free 1-on-1 Trial Class at your home:\n💬 WhatsApp: 9187502066\n📞 Call: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com",
+              "keywords": ["fees", "cost", "price", "rate", "hourly rate", "monthly fees", "book demo", "trial class", "free demo", "whatsapp tutor"],
+              "patterns": [
+                "(fee|fees|cost|price|rate|charge).*(home tutor|home tuition)",
+                "book.*(home|tutor|trial).*demo"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "franchise_opportunity",
+          "label": "🏢 Franchise Opportunity",
+          "response": "Launch your own V.18 Smart Tuition Center with our complete tech ecosystem, 3D visual software licenses, marketing support, and high-margin revenue model.",
+          "keywords": ["franchise", "franchisee", "business", "invest", "investment", "open center", "branch"],
+          "patterns": ["franchise.*(opportunity|cost|roi|setup|open)", "start.*(branch|center|franchise)", "business.*opportunity"],
           "children": []
         }
       ]
     },
     {
-      "id": "about",
-      "label": "ℹ️ About V.18",
-      "response": "V.18 is a tech-enabled premium tuition ecosystem empowering students through 3D models and bilingual pedagogy.",
-      "keywords": ["about", "v18", "who are you", "mission", "founder"],
+      "id": "whatsapp_root",
+      "label": "💬 Chat on WhatsApp",
+      "response": "Click below to connect directly with our academic counselor on WhatsApp for instant assistance:\n\n💬 WhatsApp: 9187502066\n\nWe typically reply within a few minutes!",
+      "keywords": ["whatsapp", "wa", "chat", "message", "whatsapp number", "chat on whatsapp", "talk on whatsapp", "9187502066"],
+      "patterns": [
+        "(whatsapp|wa|chat).*(number|connect|talk|link|me)?",
+        "how.*(chat|message).*whatsapp",
+        "give.*whatsapp"
+      ],
       "children": []
     },
     {
-      "id": "contact",
-      "label": "📞 Contact & Demo",
-      "response": "📍 APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka\n📞 Phone: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com",
-      "keywords": ["contact", "phone", "email", "address", "location", "demo", "trial", "call"],
+      "id": "contact_root",
+      "label": "📞 Contact & Free Demo",
+      "response": "We'd love to assist you! Here are our direct contact details:\n\n💬 WhatsApp: 9187502066\n📞 Phone: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com\n📍 Address: APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka\n\n💬 Feel free to message or call us directly to book a Free Demo Session!",
+      "keywords": ["contact", "phone", "number", "call", "email", "address", "location", "demo", "trial", "reach"],
+      "patterns": [
+        "(how|where).*(contact|reach|call|visit)",
+        "(phone|mobile|contact).*number",
+        "book.*(demo|trial|seat)",
+        "email.*(address|id)"
+      ],
+      "children": []
+    },
+    {
+      "id": "casual_greeting",
+      "hidden": true,
+      "label": "Greeting",
+      "response": "Hello there! 👋 Welcome to V.18 Premium Tuition. How can I help you today?",
+      "keywords": ["hi", "hello", "hey", "namaste", "good morning", "good evening", "good afternoon", "hola", "yo", "sup"],
+      "patterns": ["^(hi|hello|hey|namaste|hlo|heyy|hiya|yo|greetings)[\\s!.]*$", "good.*(morning|afternoon|evening|day)"],
+      "children": []
+    },
+    {
+      "id": "casual_how_are_you",
+      "hidden": true,
+      "label": "How are you",
+      "response": "I'm doing fantastic, thank you! 😊 Ready to help you discover our 3D visual tuition programs. How can I assist you?",
+      "keywords": ["how are you", "how r u", "how do you do", "whats up", "how are you doing"],
+      "patterns": ["how.*(are you|r u|do you do|is it going|you doing)", "what.*(is up|s up|sup)"],
+      "children": []
+    },
+    {
+      "id": "casual_identity",
+      "hidden": true,
+      "label": "Identity",
+      "response": "I am the official AI Assistant of **V.18 Premium Tuition**! 🤖\nAsk me anything about our classes, SIP, Franchise, or Smart Learning Kits, or chat on WhatsApp at 9187502066.",
+      "keywords": ["name", "who are you", "your name", "who r u", "what is your name", "identity"],
+      "patterns": ["(what|tell).*(your name|ur name)", "who.*(are you|r u)", "what.*are.*you"],
+      "children": []
+    },
+    {
+      "id": "casual_human_or_bot",
+      "hidden": true,
+      "label": "Human or AI",
+      "response": "I'm an AI assistant for V.18! ⚡ If you'd like to speak with our human academic counselors directly, chat on WhatsApp at 💬 9187502066 or call 📞 +91 8197770882.",
+      "keywords": ["are you human", "are you a bot", "are you real", "are you ai", "are you robot", "real person"],
+      "patterns": ["are.*you.*(human|bot|robot|ai|real|machine)", "am.*i.*talking.*to.*(human|robot|ai|bot)"],
+      "children": []
+    },
+    {
+      "id": "casual_joke",
+      "hidden": true,
+      "label": "Joke",
+      "response": "Why did the student eat their math homework? 🍕\n... Because the teacher told them it was a piece of cake! 😆\n\nHow can I help you with your studies or queries today?",
+      "keywords": ["joke", "funny", "make me laugh", "tell me a joke", "comedy"],
+      "patterns": ["(tell|say|crack).*(joke|something funny)", "make.*me.*laugh"],
+      "children": []
+    },
+    {
+      "id": "casual_gratitude",
+      "hidden": true,
+      "label": "Thank you",
+      "response": "You're most welcome! 😊 Feel free to ask anything else about V.18.",
+      "keywords": ["thank you", "thanks", "tq", "thank u", "bye", "goodbye", "see you"],
+      "patterns": ["(thank|thanks|thx|tq).*", "^(bye|goodbye|cya|see you|take care)[\\s!.]*$"],
       "children": []
     }
   ]

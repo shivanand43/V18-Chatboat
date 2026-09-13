@@ -9,7 +9,41 @@ const MessageList = memo(function MessageList({ messages, isTyping, typingStatus
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping, typingStatus]);
+// Parses plain text and converts phone numbers & emails into clickable links
+function renderFormattedMessage(text) {
+  if (!text) return null;
 
+  // Regex to match phone numbers (+91...) and email addresses
+  const tokenRegex = /(\+91\s?\d{10}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const parts = text.split(tokenRegex);
+
+  return parts.map((part, index) => {
+    if (/^\+91\s?\d{10}$/.test(part.trim())) {
+      const cleanPhone = part.replace(/\s+/g, "");
+      return (
+        <a
+          key={index}
+          href={`tel:${cleanPhone}`}
+          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+        >
+          {part}
+        </a>
+      );
+    }
+    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part.trim())) {
+      return (
+        <a
+          key={index}
+          href={`mailto:${part.trim()}`}
+          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+}
   return (
     <div className={styles.messageArea}>
       {messages.map((msg) => (
@@ -24,7 +58,7 @@ const MessageList = memo(function MessageList({ messages, isTyping, typingStatus
               msg.sender === "bot" ? styles.botBubble : styles.userBubble
             }`}
           >
-            {msg.text}
+{renderFormattedMessage(msg.text)}
           </div>
         </div>
       ))}

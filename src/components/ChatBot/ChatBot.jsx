@@ -11,7 +11,67 @@ const MessageList = function MessageList({ messages, isTyping, typingStatus }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping, typingStatus]);
+// Parses plain text and converts phone numbers & emails into clickable links
+function renderFormattedMessage(text) {
+  if (!text) return null;
 
+  // Regex matches Indian numbers (10 digits with or without +91) and email addresses
+  const tokenRegex = /(\+?91[\s-]?\d{10}|\b\d{10}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const parts = text.split(tokenRegex);
+
+  return parts.map((part, index) => {
+    const clean = part.replace(/[\s-]/g, "");
+
+    // 1. WhatsApp Number Match -> Direct WhatsApp Web / App Link
+    if (clean === "9187502066" || clean === "919187502066" || clean === "+919187502066") {
+      return (
+        <a
+          key={index}
+          href="https://wa.me/919187502066?text=Hi%20V.18%20Team%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs."
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#16a34a", fontWeight: "700", textDecoration: "underline" }}
+        >
+          {part}
+        </a>
+      );
+    }
+
+    // 2. Regular Calling Number Match -> Dial pad (tel:)
+    if (/^(\+?91)?\d{10}$/.test(clean)) {
+      const dialNumber = clean.startsWith("+")
+        ? clean
+        : clean.startsWith("91")
+        ? `+${clean}`
+        : `+91${clean}`;
+
+      return (
+        <a
+          key={index}
+          href={`tel:${dialNumber}`}
+          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+        >
+          {part}
+        </a>
+      );
+    }
+
+    // 3. Email Match -> Mail App (mailto:)
+    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part.trim())) {
+      return (
+        <a
+          key={index}
+          href={`mailto:${part.trim()}`}
+          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+        >
+          {part}
+        </a>
+      );
+    }
+
+    return part;
+  });
+}
   return (
     <div className={styles.messageArea}>
       {messages.map((msg) => (
@@ -26,7 +86,7 @@ const MessageList = function MessageList({ messages, isTyping, typingStatus }) {
               msg.sender === "bot" ? styles.botBubble : styles.userBubble
             }`}
           >
-            {msg.text}
+{renderFormattedMessage(msg.text)}
           </div>
         </div>
       ))}
@@ -85,7 +145,7 @@ const ActionChips = memo(function ActionChips({
 
   return (
     <div className={styles.chipWrapper}>
-      {activeNodes && activeNodes.map((node) => (
+      {activeNodes && activeNodes.filter((node) => !node.hidden).map((node) => (
         <button
           key={node.id}
           type="button"
@@ -106,7 +166,7 @@ const ActionChips = memo(function ActionChips({
         </button>
       )}
 
-      {activeNodes && activeNodes.length === 0 && (
+      {activeNodes && activeNodes.filter((n) => !n.hidden).length === 0 && (
         <button
           type="button"
           className={`${styles.actionChip} ${styles.navControlChip}`}

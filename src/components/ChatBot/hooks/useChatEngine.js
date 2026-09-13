@@ -98,42 +98,81 @@ export function useChatEngine() {
   }, [currentDataset, lang]);
 
   // Keyword Search
-  const searchTree = useCallback((nodes, query) => {
-    const cleanQuery = query.toLowerCase().trim();
-    const tokens = cleanQuery.split(/\s+/).filter((t) => t.length > 1);
-    if (tokens.length === 0) return null;
+ // Smart Multi-Factor Matcher for V.18 Tuition
+const searchTree = useCallback((nodes, rawQuery) => {
+  if (!rawQuery || !rawQuery.trim()) return null;
 
-    const regexPattern = new RegExp(`(${tokens.join("|")})`, "i");
-    let bestMatch = null;
-    let maxScore = 0;
+  // 1. Normalize Query (strip punctuation, lower case, clean spaces)
+  const clean = rawQuery
+    .toLowerCase()
+    .replace(/[^\w\s\u0C80-\u0CFF]/gi, " ") // Supports English & Kannada scripts
+    .trim();
 
-    function traverse(nodeList) {
-      for (const node of nodeList) {
-        let score = 0;
-        if (node.label && node.label.toLowerCase().includes(cleanQuery)) score += 10;
-        if (node.response && node.response.toLowerCase().includes(cleanQuery)) score += 5;
+  const queryTokens = clean.split(/\s+/).filter((t) => t.length > 1);
+  if (queryTokens.length === 0) return null;
 
-        if (node.keywords && Array.isArray(node.keywords)) {
-          node.keywords.forEach((kw) => {
-            if (regexPattern.test(kw)) score += 8;
-            if (cleanQuery.includes(kw.toLowerCase())) score += 6;
+  let bestMatch = null;
+  let highestScore = 0;
+
+  function evaluateNodes(nodeList) {
+    for (const node of nodeList) {
+      let score = 0;
+
+      // Rule A: Direct Exact Match on Question / Label (Highest priority)
+      if (node.label && clean.includes(node.label.toLowerCase())) {
+        score += 25;
+      }
+
+      // Rule B: Entity / Keyword Matches
+      if (node.keywords && Array.isArray(node.keywords)) {
+        node.keywords.forEach((kw) => {
+          const lowerKw = kw.toLowerCase();
+          
+          // Exact keyword phrase match
+          if (clean.includes(lowerKw)) {
+            score += lowerKw.includes(" ") ? 15 : 8; // Multi-word phrases like "offline fee" get higher weight
+          }
+          
+          // Token-level match
+          queryTokens.forEach((token) => {
+            if (lowerKw === token) {
+              score += 4;
+            }
           });
-        }
+        });
+      }
 
-        if (score > maxScore) {
-          maxScore = score;
-          bestMatch = node;
-        }
+      // Rule C: Synonym / Intent Patterns (Regex clusters)
+      if (node.patterns && Array.isArray(node.patterns)) {
+        node.patterns.forEach((patternStr) => {
+          try {
+            const regex = new RegExp(patternStr, "i");
+            if (regex.test(clean)) {
+              score += 12; // Strong regex intent match
+            }
+          } catch (e) {
+            // Safe fallback for pattern errors
+          }
+        });
+      }
 
-        if (node.children && node.children.length > 0) {
-          traverse(node.children);
-        }
+      if (score > highestScore) {
+        highestScore = score;
+        bestMatch = node;
+      }
+
+      // Recursively evaluate deep sub-questions
+      if (node.children && node.children.length > 0) {
+        evaluateNodes(node.children);
       }
     }
+  }
 
-    traverse(nodes);
-    return maxScore >= 6 ? bestMatch : null;
-  }, []);
+  evaluateNodes(nodes);
+
+  // Confidence Threshold: Only return if score is solid, otherwise fallback
+  return highestScore >= 10 ? bestMatch : null;
+}, []);
 
   // Free-Text Search with Realistic Multi-Phase AI Simulation
   const handleSendQuery = useCallback((text) => {
