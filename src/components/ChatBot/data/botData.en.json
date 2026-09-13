@@ -1,0 +1,86 @@
+ {
+  "greeting": "Welcome to V.18 Premium Tuition! How can we assist you today?",
+  "fallback": "I couldn't find an exact answer. Please reach our counselor directly at +91 8197770882 or admin@v18premiumtuition.com.",
+  "nodes": [
+    {
+      "id": "services",
+      "label": "📚 Our Services & Programs",
+      "response": "Here are our core learning and partnership programs:",
+      "keywords": ["service", "program", "course", "offer", "learn"],
+      "children": [
+        {
+          "id": "sip",
+          "label": "🏫 School Integration Program (SIP)",
+          "response": "V.18 SIP integrates 3D smart classroom modules and AR/VR labs directly into school curricula.",
+          "keywords": ["sip", "school", "integrate", "tieup", "institution"],
+          "children": [
+            {
+              "id": "sip_features",
+              "label": "What are SIP features?",
+              "response": "SIP includes: 1) 3D visual concept videos, 2) Teacher training, 3) Assessment tools for CBSE/ICSE/State boards.",
+              "keywords": ["feature", "benefit", "curriculum", "syllabus"],
+              "children": []
+            },
+            {
+              "id": "sip_contact",
+              "label": "How to onboard my school?",
+              "response": "Call our Institutional Desk at +91 8197770882 to schedule an on-campus demonstration.",
+              "keywords": ["onboard", "partner", "book demo", "school visit"],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "franchise",
+          "label": "🏢 Franchise Opportunities",
+          "response": "Partner with V.18 to launch a smart tech-tuition branch in your locality.",
+          "keywords": ["franchise", "business", "partner", "invest", "center"],
+          "children": [
+            {
+              "id": "franchise_roi",
+              "label": "Profitability & ROI Model",
+              "response": "Low upfront investment with high margins due to pre-built digital content, AR/VR labs, and strong student demand.",
+              "keywords": ["roi", "profit", "margin", "cost", "investment", "earn"],
+              "children": []
+            },
+            {
+              "id": "franchise_support",
+              "label": "What support is provided?",
+              "response": "We provide center setup guidance, hardware specs, teacher training, marketing collateral, and student lead generation.",
+              "keywords": ["support", "training", "setup", "help", "marketing"],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "home_tuition",
+          "label": "👨‍🏫 1-on-1 Home Tuition",
+          "response": "Personalized 1-on-1 tutoring at home with 3D visualization tools for grades 8 to 12.",
+          "keywords": ["home", "tutor", "1 on 1", "personal", "individual"],
+          "children": []
+        },
+        {
+          "id": "offline_classes",
+          "label": "🎒 Offline Smart Classes",
+          "response": "Classroom batches in Jamkhandi center with interactive screens and small batch sizes.",
+          "keywords": ["offline", "jamkhandi", "classroom", "batch", "center"],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "label": "ℹ️ About V.18",
+      "response": "V.18 is a tech-enabled premium tuition ecosystem empowering students through 3D models and bilingual pedagogy.",
+      "keywords": ["about", "v18", "who are you", "mission", "founder"],
+      "children": []
+    },
+    {
+      "id": "contact",
+      "label": "📞 Contact & Demo",
+      "response": "📍 APMC Yard, Prabhat Nagar, Jamkhandi, Karnataka\n📞 Phone: +91 8197770882\n✉️ Email: admin@v18premiumtuition.com",
+      "keywords": ["contact", "phone", "email", "address", "location", "demo", "trial", "call"],
+      "children": []
+    }
+  ]
+}
