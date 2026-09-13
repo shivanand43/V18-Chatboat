@@ -1,4 +1,4 @@
-import ChatBot from "/V18-chatbot/src/components/ChatBot/ChatBot";
+import ChatBot from "./components/ChatBot/ChatBot";
 
 export default function App() {
   return (
