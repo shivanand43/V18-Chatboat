@@ -1,6 +1,6 @@
 import  { useState, useEffect, useCallback, useRef, memo } from "react";
-import { useChatEngine } from "/V18-chatbot/src/components/ChatBot/hooks/useChatEngine";
-import { useDraggable } from "/V18-chatbot/src/components/ChatBot/hooks/useDraggable";
+import { useChatEngine } from "./hooks/useChatEngine";
+import { useDraggable } from "./hooks/useDraggable";
 import styles from "./ChatBot.module.css";
 
 // 1. Message List

@@ -1,87 +1,87 @@
-import  { memo, useEffect, useRef } from "react";
-import styles from "../ChatBot.module.css";
+// import  { memo, useEffect, useRef } from "react";
+// import styles from "../ChatBot.module.css";
 
-const MessageList = memo(function MessageList({ messages, isTyping, typingStatus }) {
+// const MessageList = memo(function MessageList({ messages, isTyping, typingStatus }) {
     
-  const scrollRef = useRef(null);
+//   const scrollRef = useRef(null);
 
-  // Auto scroll to bottom on every message or typing state change
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping, typingStatus]);
-// Parses plain text and converts phone numbers & emails into clickable links
-function renderFormattedMessage(text) {
-  if (!text) return null;
+//   // Auto scroll to bottom on every message or typing state change
+//   useEffect(() => {
+//     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+//   }, [messages, isTyping, typingStatus]);
+// // Parses plain text and converts phone numbers & emails into clickable links
+// function renderFormattedMessage(text) {
+//   if (!text) return null;
 
-  // Regex to match phone numbers (+91...) and email addresses
-  const tokenRegex = /(\+91\s?\d{10}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
-  const parts = text.split(tokenRegex);
+//   // Regex to match phone numbers (+91...) and email addresses
+//   const tokenRegex = /(\+91\s?\d{10}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+//   const parts = text.split(tokenRegex);
 
-  return parts.map((part, index) => {
-    if (/^\+91\s?\d{10}$/.test(part.trim())) {
-      const cleanPhone = part.replace(/\s+/g, "");
-      return (
-        <a
-          key={index}
-          href={`tel:${cleanPhone}`}
-          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
-        >
-          {part}
-        </a>
-      );
-    }
-    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part.trim())) {
-      return (
-        <a
-          key={index}
-          href={`mailto:${part.trim()}`}
-          style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
-        >
-          {part}
-        </a>
-      );
-    }
-    return part;
-  });
-}
-  return (
-    <div className={styles.messageArea}>
-      {messages.map((msg) => (
-        <div
-          key={msg.id}
-          className={`${styles.messageRow} ${
-            msg.sender === "bot" ? styles.botRow : styles.userRow
-          }`}
-        >
-          <div
-            className={`${styles.messageBubble} ${
-              msg.sender === "bot" ? styles.botBubble : styles.userBubble
-            }`}
-          >
-{renderFormattedMessage(msg.text)}
-          </div>
-        </div>
-      ))}
+//   return parts.map((part, index) => {
+//     if (/^\+91\s?\d{10}$/.test(part.trim())) {
+//       const cleanPhone = part.replace(/\s+/g, "");
+//       return (
+//         <a
+//           key={index}
+//           href={`tel:${cleanPhone}`}
+//           style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+//         >
+//           {part}
+//         </a>
+//       );
+//     }
+//     if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part.trim())) {
+//       return (
+//         <a
+//           key={index}
+//           href={`mailto:${part.trim()}`}
+//           style={{ color: "#2563eb", fontWeight: "600", textDecoration: "underline" }}
+//         >
+//           {part}
+//         </a>
+//       );
+//     }
+//     return part;
+//   });
+// }
+//   return (
+//     <div className={styles.messageArea}>
+//       {messages.map((msg) => (
+//         <div
+//           key={msg.id}
+//           className={`${styles.messageRow} ${
+//             msg.sender === "bot" ? styles.botRow : styles.userRow
+//           }`}
+//         >
+//           <div
+//             className={`${styles.messageBubble} ${
+//               msg.sender === "bot" ? styles.botBubble : styles.userBubble
+//             }`}
+//           >
+// {renderFormattedMessage(msg.text)}
+//           </div>
+//         </div>
+//       ))}
 
-      {/* Typing Bubble */}
-      {Boolean(isTyping) && (
-        <div className={`${styles.messageRow} ${styles.botRow}`}>
-          <div className={`${styles.messageBubble} ${styles.botBubble} ${styles.typingBubble}`}>
-            <div className={styles.dotWave}>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
-            </div>
-            {typingStatus && (
-              <span className={styles.typingStatusText}>{typingStatus}</span>
-            )}
-          </div>
-        </div>
-      )}
+//       {/* Typing Bubble */}
+//       {Boolean(isTyping) && (
+//         <div className={`${styles.messageRow} ${styles.botRow}`}>
+//           <div className={`${styles.messageBubble} ${styles.botBubble} ${styles.typingBubble}`}>
+//             <div className={styles.dotWave}>
+//               <span className={styles.dot}></span>
+//               <span className={styles.dot}></span>
+//               <span className={styles.dot}></span>
+//             </div>
+//             {typingStatus && (
+//               <span className={styles.typingStatusText}>{typingStatus}</span>
+//             )}
+//           </div>
+//         </div>
+//       )}
 
-      <div ref={scrollRef} style={{ height: "1px" }} />
-    </div>
-  );
-});
+//       <div ref={scrollRef} style={{ height: "1px" }} />
+//     </div>
+//   );
+// });
 
-export default MessageList;
+// export default MessageList;
